@@ -7,8 +7,9 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: inkspire
-      POSTGRES_PASSWORD: inkspire_password
+      POSTGRES_PASSWORD: inkspire123
       POSTGRES_DB: inkspire
+      POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - "5432:5432"
     volumes:
