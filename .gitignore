@@ -8,4 +8,4 @@ build
 .env.local
 .env.production
 *.log
-.DS_Store
+.DS_Storepackages/database/.env
