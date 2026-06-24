@@ -1,2 +1,0 @@
-# inkspire
-A Blog site
