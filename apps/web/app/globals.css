@@ -1,23 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --primary: 243 87% 64%;
-    --primary-foreground: 0 0% 100%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --border: 214.3 31.8% 91.4%;
-    --radius: 0.5rem;
-  }
-
-  * { @apply border-border; }
-  body { @apply bg-background text-foreground; }
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #0a0a1a;
+  --color-primary: #6c5ce7;
+  --color-primary-foreground: #ffffff;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+  --radius: 0.5rem;
 }
 
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+/* Editor Styles */
 .ProseMirror {
   outline: none;
   min-height: 400px;
