@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: inkspire-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: inkspire
+    ports:
+      - "5432:5432"
+    volumes:
+      - inkspire_postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: inkspire-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - inkspire_redis_data:/data
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.7
+    container_name: inkspire-meilisearch
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: inkspire-master-key
+      MEILI_ENV: development
+    ports:
+      - "7700:7700"
+    volumes:
+      - inkspire_meili_data:/meili_data
+
+volumes:
+  inkspire_postgres_data:
+  inkspire_redis_data:
+  inkspire_meili_data:
