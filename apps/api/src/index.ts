@@ -3,6 +3,8 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
+import { requireAuth, requireRole } from './middleware/auth'
+import type { AuthRequest } from './middleware/auth'
 
 dotenv.config()
 
@@ -20,6 +22,16 @@ app.use(express.urlencoded({ extended: true }))
 
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', service: 'inkspire-api', timestamp: new Date().toISOString() })
+})
+
+// Protected test route
+app.get('/api/me', requireAuth, (req: AuthRequest, res) => {
+  res.json({ user: req.user })
+})
+
+// Admin only test route
+app.get('/api/admin', requireAuth, requireRole('ADMIN'), (req: AuthRequest, res) => {
+  res.json({ message: 'Welcome admin', user: req.user })
 })
 
 app.use((_req, res) => {
