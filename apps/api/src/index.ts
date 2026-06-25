@@ -5,6 +5,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import { requireAuth, requireRole } from "./middleware/auth";
 import type { AuthRequest } from "./middleware/auth";
+import usersRouter from "./routes/users"; // ✅ Added import
 
 dotenv.config();
 
@@ -34,6 +35,9 @@ app.get("/health", (_req, res) => {
 app.get("/api/me", requireAuth, (req: AuthRequest, res) => {
   res.json({ user: req.user });
 });
+
+// ✅ Mount the users router
+app.use("/api/users", usersRouter);
 
 // Admin only test route
 app.get(
